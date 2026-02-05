@@ -14,6 +14,7 @@
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       color: #fff;
+      overflow: hidden;
     }
     .card {
       background: rgba(0, 0, 0, 0.25);
@@ -22,6 +23,7 @@
       text-align: center;
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
       max-width: 90%;
+      z-index: 2;
     }
     h1 {
       font-size: 2rem;
@@ -63,6 +65,25 @@
       font-size: 1.3rem;
       display: none;
     }
+
+    /* floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 24px;
+      animation: floatUp 4s linear forwards;
+      pointer-events: none;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.6);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -83,9 +104,26 @@
     const noBtn = document.getElementById('no');
     const result = document.getElementById('result');
 
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
     yesBtn.onclick = () => {
       result.style.display = 'block';
-      result.innerHTML = "YAY,She said yes 💐";
+      result.innerHTML = "YAY,She said YES! 💐";
+
+      for (let i = 0; i < 25; i++) {
+        setTimeout(createHeart, i * 120);
+      }
     };
 
     noBtn.onclick = () => {
