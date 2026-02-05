@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff5f9e, #ff8fb1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 25px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      max-width: 320px;
+      width: 90%;
+    }
+
+    h1 {
+      color: #ff3366;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-top: 0;
+      color: #444;
+    }
+
+    button {
+      margin: 15px 10px 0;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: #ff3366;
+      color: white;
+    }
+
+    .no {
+      background: #ddd;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .hearts span {
+      position: fixed;
+      bottom: -20px;
+      font-size: 24px;
+      animation: floatUp 5s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1>Will you be my Valentine wifey? ❤️</h1>
+    <p>From your love</p>
+    <button class="yes" onclick="yesClicked()">Yes</button>
+    <button class="no">No</button>
+  </div>
+
+  <div class="card hidden" id="yesScreen">
+    <h1>She said YES ❤️</h1>
+    <p>Best Valentine ever 💐</p>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+
+  <script>
+    function yesClicked() {
+      document.getElementById("card").classList.add("hidden");
+      document.getElementById("yesScreen").classList.remove("hidden");
+      startHearts();
+    }
+
+    function startHearts() {
+      const hearts = document.getElementById("hearts");
+      setInterval(() => {
+        const heart = document.createElement("span");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 2) + "s";
+        hearts.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
